@@ -1,1 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClipPlayer</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: black;
+        }
+        #player {
+            position: fixed;
+            z-index: -1;
+            left: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+        }
+        #playButton {
+            font-size: 20px;
+            padding: 15px 30px;
+            cursor: pointer;
+            background-color: white;
+            border: none;
+            border-radius: 5px;
+            position: absolute;
+            z-index: 10;
+        }
+        #audioPlayer {
+            display: none;
+            position: absolute;
+            bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Кнопка для начала воспроизведения аудио -->
+    <button id="playButton">Play audio</button>
 
+    <script>
+        const body = document.body;
+        const playButton = document.getElementById('playButton');
+
+        // Создаем и добавляем видео
+        const videoPlayer = Object.assign(document.createElement('video'), {
+            id: 'player',
+            autoplay: true,
+            muted: true,
+            src: './video1.mp4',
+            onclick: togglePlayPause,
+            onended: () => changeMedia(videoPlayer, 'video', 3),
+        });
+        body.appendChild(videoPlayer);
+
+        // Создаем аудиоплеер (изначально скрыт)
+        const audioPlayer = Object.assign(document.createElement('audio'), {
+            id: 'audioPlayer',
+            src: './audio1.mp3',
+            controls: true,
+            onended: () => changeMedia(audioPlayer, 'audio', 3),
+        });
+        body.appendChild(audioPlayer);
+
+        playButton.onclick = () => {
+            audioPlayer.play();
+            audioPlayer.style.display = 'block'; // Показываем аудиоплеер
+            playButton.style.display = 'none'; // Скрываем кнопку
+        };
+
+        let videoCount = 1, audioCount = 1;
+
+        function changeMedia(player, type, maxCount) {
+            let count = type === 'video' ? ++videoCount : ++audioCount;
+            if (count > maxCount) count = 1;
+
+            if (type === 'video') videoCount = count;
+            else audioCount = count;
+
+            player.src = `./${type}${count}.${type === 'video' ? 'mp4' : 'mp3'}`;
+            player.play();
+        }
+
+        function togglePlayPause() {
+            videoPlayer[videoPlayer.paused ? 'play' : 'pause']();
+        }
+    </script>
+</body>
+</html>
