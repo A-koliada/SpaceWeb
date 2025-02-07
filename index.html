@@ -37,16 +37,15 @@
             bottom: 20px;
         }
     </style>
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'SpaceWeb/favicon-32x32.png' %}"/>
 </head>
 <body>
-    <!-- Кнопка для начала воспроизведения аудио -->
     <button id="playButton">Play audio</button>
 
     <script>
         const body = document.body;
         const playButton = document.getElementById('playButton');
 
-        // Создаем и добавляем видео
         const videoPlayer = Object.assign(document.createElement('video'), {
             id: 'player',
             autoplay: true,
@@ -57,7 +56,6 @@
         });
         body.appendChild(videoPlayer);
 
-        // Создаем аудиоплеер (изначально скрыт)
         const audioPlayer = Object.assign(document.createElement('audio'), {
             id: 'audioPlayer',
             src: './audio1.mp3',
@@ -68,8 +66,8 @@
 
         playButton.onclick = () => {
             audioPlayer.play();
-            audioPlayer.style.display = 'block'; // Показываем аудиоплеер
-            playButton.style.display = 'none'; // Скрываем кнопку
+            audioPlayer.style.display = 'block'; 
+            playButton.style.display = 'none'; 
         };
 
         let videoCount = 1, audioCount = 1;
