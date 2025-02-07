@@ -40,7 +40,6 @@
 </head>
 <body>
     <button id="playButton">Play audio</button>
-
     <script>
         const body = document.body;
         const playButton = document.getElementById('playButton');
@@ -54,7 +53,6 @@
             onended: () => changeMedia(videoPlayer, 'video', 3),
         });
         body.appendChild(videoPlayer);
-
         const audioPlayer = Object.assign(document.createElement('audio'), {
             id: 'audioPlayer',
             src: './audio1.mp3',
@@ -62,15 +60,12 @@
             onended: () => changeMedia(audioPlayer, 'audio', 3),
         });
         body.appendChild(audioPlayer);
-
         playButton.onclick = () => {
             audioPlayer.play();
             audioPlayer.style.display = 'block'; 
             playButton.style.display = 'none'; 
         };
-
         let videoCount = 1, audioCount = 1;
-
         function changeMedia(player, type, maxCount) {
             let count = type === 'video' ? ++videoCount : ++audioCount;
             if (count > maxCount) count = 1;
@@ -81,7 +76,6 @@
             player.src = `./${type}${count}.${type === 'video' ? 'mp4' : 'mp3'}`;
             player.play();
         }
-
         function togglePlayPause() {
             videoPlayer[videoPlayer.paused ? 'play' : 'pause']();
         }
