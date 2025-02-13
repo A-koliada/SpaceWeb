@@ -7,11 +7,9 @@ document.addEventListener("DOMContentLoaded", () => {
             event.preventDefault();
             const value = inputField.value.trim();
             typeOutput.textContent = determineType(value);
+        } else {
+            typeOutput.textContent = "---"; // Очищення при введенні нового значення
         }
-    });
-
-    inputField.addEventListener("input", () => {
-        typeOutput.textContent = "---"; // Очищення при введенні нового значення
     });
 
     function determineType(value) {
