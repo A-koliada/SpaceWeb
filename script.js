@@ -2,7 +2,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const inputField = document.getElementById("inputField");
     const typeOutput = document.getElementById("typeOutput");
 
-    inputField.addEventListener("change", () => {
+    // Очищення Type при кожному введенні символу
+    inputField.addEventListener("input", () => {
         typeOutput.textContent = "---"; 
     });
 
@@ -14,14 +15,13 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-function determineType(value) {
-    value = value.trim(); 
-    if (value === "") return "Empty";
-    if (/^-?\d+(\.\d+)?$/.test(value)) {
-        return value.includes(".") ? "Float" : "Integer"; 
+    function determineType(value) {
+        value = value.trim(); 
+        if (value === "") return "Empty";
+        if (/^-?\d+(\.\d+)?$/.test(value)) {
+            return value.includes(".") ? "Float" : "Integer"; 
+        }
+        if (value.toLowerCase() === "true" || value.toLowerCase() === "false") return "Boolean";
+        return "String";
     }
-    if (value.toLowerCase() === "true" || value.toLowerCase() === "false") return "Boolean";
-    return "String";
-
-
 });
