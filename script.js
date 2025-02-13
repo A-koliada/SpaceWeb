@@ -19,16 +19,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function determineType(value) {
         if (value === "") return "Empty";  // Якщо значення порожнє
-        if (/^-?\d+(\.\d+)?$/.test(value)) {
-            return value.includes(".") ? "Float" : "Integer";  // Перевірка на числа
-        }
+
+        // Перевірка на BigInt
         if (/^\d+n$/.test(value)) {
-            return "BigInt";  // Перевірка на BigInt
+            return "BigInt";  // Перевірка на BigInt (якщо значення закінчується на "n")
         }
-        if (value.toLowerCase() === "true" || value.toLowerCase() === "false") return "Boolean";  // Перевірка на Boolean
-        if (value === "null") return "Null";  // Перевірка на Null
-        if (value === "undefined") return "Undefined";  // Перевірка на Undefined
-        if (typeof Symbol(value) === "symbol") return "Symbol";  // Перевірка на Symbol
+
+        // Перевірка на числові значення
+        if (/^-?\d+(\.\d+)?$/.test(value)) {
+            const numValue = Number(value);
+            if (Math.abs(numValue) > Number.MAX_SAFE_INTEGER) {
+                return "BigInt";  // Якщо значення перевищує максимально безпечне ціле число для Number
+            }
+            return value.includes(".") ? "Float" : "Integer";  // Перевірка на Float або Integer
+        }
+
+        // Перевірка на Boolean
+        if (value.toLowerCase() === "true" || value.toLowerCase() === "false") return "Boolean"; 
+
+        // Перевірка на Null
+        if (value === "null") return "Null"; 
+
+        // Перевірка на Undefined
+        if (value === "undefined") return "Undefined"; 
+
         return "String";  // Якщо нічого не підходить - String
     }
 });
