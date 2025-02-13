@@ -20,30 +20,29 @@ document.addEventListener("DOMContentLoaded", () => {
     function determineType(value) {
         if (value === "") return "Empty";  // Якщо значення порожнє
 
-        // Перевірка на BigInt
+        // Перевірка на BigInt (якщо значення закінчується на "n")
         if (/^\d+n$/.test(value)) {
             try {
-                BigInt(value);  // Пробуємо перетворити в BigInt
-                return "BigInt";  // Якщо вдалося, це BigInt
+                BigInt(value);  // Перетворюємо значення в BigInt
+                return "BigInt";  // Якщо вдалося перетворити
             } catch (e) {
-                // Якщо не вдалося перетворити в BigInt, пропускаємо
+                return "Invalid BigInt"; // Якщо не вдалося перетворити в BigInt
             }
         }
 
         // Перевірка на числові значення
         if (/^-?\d+(\.\d+)?$/.test(value)) {
             const numValue = Number(value);
-            
             // Перевірка на дуже великі числа
             if (numValue > Number.MAX_SAFE_INTEGER || numValue < -Number.MAX_SAFE_INTEGER) {
                 try {
                     BigInt(value);  // Якщо значення велике, пробуємо перетворити в BigInt
                     return "BigInt";  // Якщо вдалося, це BigInt
                 } catch (e) {
-                    // Якщо не вдалося перетворити в BigInt, залишаємо як звичайне число
+                    // Якщо не вдалося перетворити в BigInt, повертаємо "Invalid"
+                    return "Invalid BigInt";
                 }
             }
-            
             return value.includes(".") ? "Float" : "Integer";  // Перевірка на Float або Integer
         }
 
