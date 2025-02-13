@@ -10,6 +10,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    inputField.addEventListener("input", () => {
+        typeOutput.textContent = "---"; // Очищення при введенні нового значення
+    });
+
     function determineType(value) {
         if (value === "") return "Empty";
         if (!isNaN(value) && value !== "") return value.includes(".") ? "Float" : "Integer";
