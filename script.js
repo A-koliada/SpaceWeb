@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     inputField.addEventListener("keydown", (event) => {
         if (event.key === "Enter") {
-            event.preventDefault(); // Запобігаємо стандартному діянню Enter
+            event.preventDefault();
             const value = inputField.value.trim();
             typeOutput.textContent = determineType(value);
         }
