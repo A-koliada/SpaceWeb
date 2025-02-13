@@ -6,15 +6,6 @@ document.addEventListener("DOMContentLoaded", () => {
         typeOutput.textContent = "---";  
     });
 
-   // inputField.addEventListener("keydown", (event) => {
-   //     if (event.key === "Enter") {
-   //         event.preventDefault();  
-   //         let value = inputField.value.trim();
-   //         inputField.value = value; 
-   //         typeOutput.textContent = determineType(value);
-   //     }
-   // });
-
     function determineType(value) {
         if (value === "") return "Empty";
         if (/^-?\d+(\.\d+)?$/.test(value)) {
