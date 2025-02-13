@@ -22,35 +22,3 @@ input {
     border: 1px solid #ccc;
     border-radius: 3px;
 }
-
-body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: black;
-        }
-        #player {
-            position: fixed;
-            z-index: -1;
-            left: 0;
-            bottom: 0;
-            min-width: 100%;
-            min-height: 100%;
-        }
-        #playButton {
-            font-size: 20px;
-            padding: 15px 30px;
-            cursor: pointer;
-            background-color: white;
-            border: none;
-            border-radius: 5px;
-            position: absolute;
-            z-index: 10;
-        }
-        #audioPlayer {
-            display: none;
-            position: absolute;
-            bottom: 20px;
-        }
