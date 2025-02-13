@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ClipPlayer</title>
+    <script defer src="script.js"></script>
     <style>
         body {
             display: flex;
@@ -39,6 +40,9 @@
     </style>
 </head>
 <body>
+    <label for="inputField">Введіть значення:</label>
+    <input type="text" id="inputField" placeholder="Введіть і натисніть Enter">
+    <p>Type: <span id="typeOutput">---</span></p>
     <button id="playButton">Play audio</button>
     <script>
         const body = document.body;
