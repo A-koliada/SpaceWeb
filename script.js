@@ -9,13 +9,13 @@ document.addEventListener("DOMContentLoaded", () => {
     inputField.addEventListener("keydown", (event) => {
         if (event.key === "Enter") {
             event.preventDefault();
-            const value = inputField.value.trim();
+            let value = inputField.value.trim();
+            inputField.value = value;
             typeOutput.textContent = determineType(value);
         }
     });
 
     function determineType(value) {
-        value = value.trim(); 
         if (value === "") return "Empty";
         if (/^-?\d+(\.\d+)?$/.test(value)) {
             return value.includes(".") ? "Float" : "Integer"; 
