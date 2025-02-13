@@ -4,15 +4,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Очищення Type при введенні або видаленні
     inputField.addEventListener("input", () => {
-        const trimmedValue = inputField.value.trim(); // Очищаємо пробіли на початку та в кінці
-        inputField.value = trimmedValue;  // Оновлюємо поле вводу з новим значенням після trim
         typeOutput.textContent = "---";  // Очищуємо поле Type при будь-якому редагуванні
     });
 
     inputField.addEventListener("keydown", (event) => {
         if (event.key === "Enter") {
             event.preventDefault();  // Блокуємо стандартну поведінку (перезавантаження сторінки)
-            const value = inputField.value.trim();  // Тепер значення вже обрізається
+            let value = inputField.value.trim();  // Видаляємо зайві пробіли
+            inputField.value = value;  // Оновлюємо поле вводу з новим значенням після trim
             typeOutput.textContent = determineType(value);  // Оновлюємо Type на основі очищеного значення
         }
     });
