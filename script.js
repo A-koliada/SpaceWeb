@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const typeOutput = document.getElementById("typeOutput");
 
     inputField.addEventListener("change", () => {
-        typeOutput.textContent = "---"; // Очищення при зміні значення після втрати фокусу
+        typeOutput.textContent = "---"; 
     });
 
     inputField.addEventListener("keydown", (event) => {
@@ -14,10 +14,14 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    function determineType(value) {
-        if (value === "") return "Empty";
-        if (!isNaN(value) && value !== "") return value.includes(".") ? "Float" : "Integer";
-        if (value.toLowerCase() === "true" || value.toLowerCase() === "false") return "Boolean";
-        return "String";
+function determineType(value) {
+    value = value.trim(); 
+    if (value === "") return "Empty";
+    if (/^-?\d+(\.\d+)?$/.test(value)) {
+        return value.includes(".") ? "Float" : "Integer"; 
     }
+    if (value.toLowerCase() === "true" || value.toLowerCase() === "false") return "Boolean";
+    return "String";
+
+
 });
