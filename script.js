@@ -2,9 +2,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const inputField = document.getElementById("inputField");
     const typeOutput = document.getElementById("typeOutput");
 
-    // Очищення Type при кожному введенні символу
+    // Очищення Type при введенні або видаленні
     inputField.addEventListener("input", () => {
-        typeOutput.textContent = "---"; 
+        if (inputField.value.trim() === "") {
+            typeOutput.textContent = "---"; // Якщо поле порожнє, очищаємо Type
+        }
     });
 
     inputField.addEventListener("keydown", (event) => {
