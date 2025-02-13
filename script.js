@@ -21,18 +21,17 @@ document.addEventListener("DOMContentLoaded", () => {
         if (value === "") return "Empty";  // Якщо значення порожнє
 
         // Перевірка на BigInt
-        try {
-            if (value.endsWith("n")) {
-                BigInt(value);  // Пробуємо перетворити в BigInt
-                return "BigInt"; // Якщо вийшло, це BigInt
-            }
-        } catch (e) {
-            // Якщо не вдалося перетворити в BigInt, пропускаємо цю перевірку
+        if (/^\d+n$/.test(value)) {
+            return "BigInt";  // Перевірка на BigInt (якщо значення закінчується на "n")
         }
 
         // Перевірка на числові значення
         if (/^-?\d+(\.\d+)?$/.test(value)) {
-            return value.includes(".") ? "Float" : "Integer";  // Перевірка на числа
+            const numValue = Number(value);
+            if (Math.abs(numValue) > Number.MAX_SAFE_INTEGER) {
+                return "BigInt";  // Якщо значення перевищує максимально безпечне ціле число для Number
+            }
+            return value.includes(".") ? "Float" : "Integer";  // Перевірка на Float або Integer
         }
 
         // Перевірка на Boolean
