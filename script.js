@@ -19,16 +19,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function determineType(value) {
         if (value === "") return "Empty";  // Якщо значення порожнє
+
+        // Перевірка на BigInt
+        try {
+            if (value.endsWith("n")) {
+                BigInt(value);  // Пробуємо перетворити в BigInt
+                return "BigInt"; // Якщо вийшло, це BigInt
+            }
+        } catch (e) {
+            // Якщо не вдалося перетворити в BigInt, пропускаємо цю перевірку
+        }
+
+        // Перевірка на числові значення
         if (/^-?\d+(\.\d+)?$/.test(value)) {
             return value.includes(".") ? "Float" : "Integer";  // Перевірка на числа
         }
-        if (/^\d+n$/.test(value)) {
-            return "BigInt";  // Перевірка на BigInt
-        }
-        if (value.toLowerCase() === "true" || value.toLowerCase() === "false") return "Boolean";  // Перевірка на Boolean
-      //  if (value === "null") return "Null";  // Перевірка на Null
-      //  if (value === "undefined") return "Undefined";  // Перевірка на Undefined
-      //  if (typeof Symbol(value) === "symbol") return "Symbol";  // Перевірка на Symbol
+
+        // Перевірка на Boolean
+        if (value.toLowerCase() === "true" || value.toLowerCase() === "false") return "Boolean"; 
+
+        // Перевірка на Null
+        if (value === "null") return "Null"; 
+
+        // Перевірка на Undefined
+        if (value === "undefined") return "Undefined"; 
+
         return "String";  // Якщо нічого не підходить - String
     }
 });
