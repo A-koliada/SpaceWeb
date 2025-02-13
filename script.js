@@ -22,15 +22,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Перевірка на BigInt
         if (/^\d+n$/.test(value)) {
-            return "BigInt";  // Перевірка на BigInt (якщо значення закінчується на "n")
+            try {
+                BigInt(value);  // Пробуємо перетворити в BigInt
+                return "BigInt";  // Якщо вдалося, це BigInt
+            } catch (e) {
+                // Якщо не вдалося перетворити в BigInt, пропускаємо
+            }
         }
 
         // Перевірка на числові значення
         if (/^-?\d+(\.\d+)?$/.test(value)) {
             const numValue = Number(value);
-            if (Math.abs(numValue) > Number.MAX_SAFE_INTEGER) {
-                return "BigInt";  // Якщо значення перевищує максимально безпечне ціле число для Number
+            
+            // Перевірка на дуже великі числа
+            if (numValue > Number.MAX_SAFE_INTEGER || numValue < -Number.MAX_SAFE_INTEGER) {
+                try {
+                    BigInt(value);  // Якщо значення велике, пробуємо перетворити в BigInt
+                    return "BigInt";  // Якщо вдалося, це BigInt
+                } catch (e) {
+                    // Якщо не вдалося перетворити в BigInt, залишаємо як звичайне число
+                }
             }
+            
             return value.includes(".") ? "Float" : "Integer";  // Перевірка на Float або Integer
         }
 
