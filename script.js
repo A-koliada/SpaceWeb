@@ -1,23 +1,3 @@
-/*
-document.addEventListener("DOMContentLoaded", () => {
-    const inputField = document.getElementById("inputField");
-    const typeOutput = document.getElementById("typeOutput");
-
-        inputField.addEventListener("input", () => {
-        typeOutput.textContent = "---";  
-    });
-
-    function determineType(value) {
-        if (value === "") return "Empty";
-        if (/^-?\d+(\.\d+)?$/.test(value)) {
-            return value.includes(".") ? "Float" : "Integer";
-        }
-        if (value.toLowerCase() === "true" || value.toLowerCase() === "false") return "Boolean";
-        return "String";
-    }
-});
-*/
-
 document.addEventListener("DOMContentLoaded", () => {
     const inputField = document.getElementById("inputField");
     const typeOutput = document.getElementById("typeOutput");
@@ -46,9 +26,9 @@ document.addEventListener("DOMContentLoaded", () => {
             return "BigInt";  // Перевірка на BigInt
         }
         if (value.toLowerCase() === "true" || value.toLowerCase() === "false") return "Boolean";  // Перевірка на Boolean
-        if (value === "null") return "Null";  // Перевірка на Null
-        if (value === "undefined") return "Undefined";  // Перевірка на Undefined
-        if (typeof Symbol(value) === "symbol") return "Symbol";  // Перевірка на Symbol
+      //  if (value === "null") return "Null";  // Перевірка на Null
+      //  if (value === "undefined") return "Undefined";  // Перевірка на Undefined
+      //  if (typeof Symbol(value) === "symbol") return "Symbol";  // Перевірка на Symbol
         return "String";  // Якщо нічого не підходить - String
     }
 });
