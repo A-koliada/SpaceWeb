@@ -2,9 +2,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const inputField = document.getElementById("inputField");
     const typeOutput = document.getElementById("typeOutput");
 
-    // Очищення Type при введенні або видаленні
     inputField.addEventListener("input", () => {
-        typeOutput.textContent = "---";  // Очищуємо поле Type при будь-якому редагуванні
+        typeOutput.textContent = "---"; 
     });
 
     inputField.addEventListener("keydown", (event) => {
